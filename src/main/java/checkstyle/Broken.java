@@ -1,4 +1,4 @@
-package ru.job4j.checkstyle;
+package checkstyle;
 
 public class Broken {
 
