@@ -2,20 +2,20 @@ package ru.job4j.oop;
 
 public class Error {
 
-    boolean active;
-    int status;
-    String message;
+    private boolean active;
+    private int status;
+    private String message;
 
-    Error(boolean active, int status, String message) {
+    public Error(boolean active, int status, String message) {
         this.active = active;
         this.status = status;
         this.message = message;
     }
 
-    Error() {
+    public Error() {
     }
 
-    void showInfo() {
+    public void showInfo() {
         System.out.println(active);
         System.out.println(status);
         System.out.println(message);
