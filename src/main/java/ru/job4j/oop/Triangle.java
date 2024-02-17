@@ -21,15 +21,13 @@ public class Triangle {
     }
 
     public double area() {
-        double result;
+        double result = -1;
         double ab = first.distance(second);
         double ac = first.distance(third);
         double bc = second.distance(third);
         if (this.exist(ab, ac, bc)) {
             double p = semiPerimeter(ab, ac, bc);
             result = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
-        } else {
-            result = -1;
         }
         return result;
     }
