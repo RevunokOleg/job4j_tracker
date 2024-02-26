@@ -8,16 +8,16 @@ public class Item {
     private String name;
     private LocalDateTime created = LocalDateTime.now();
 
-    public Item(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Item() {
     }
 
     public Item(String name) {
         this.name = name;
     }
 
-    public Item() {
+    public Item(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {
