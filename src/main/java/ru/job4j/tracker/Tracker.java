@@ -29,12 +29,27 @@ public class Tracker {
         return Arrays.copyOf(result, sizeResult);
     }
 
-    public Item findById(int id) {
+    private int indexOf(int id) {
+        int result = -1;
         for (int index = 0; index < size; index++) {
             if (items[index].getId() == id) {
-                return items[index];
+                result = index;
+                break;
             }
         }
-        return null;
+        return result;
+    }
+
+    public Item findById(int id) {
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    public boolean replace(int id, Item item) {
+        item.setId(id);
+        if (indexOf(id) != -1) {
+            items[indexOf(id)] = item;
+        }
+        return indexOf(id) != -1;
     }
 }
