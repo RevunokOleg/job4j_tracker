@@ -15,13 +15,28 @@ public class FindEl {
         return result;
     }
 
-    public static void main(String[] args) {
-        String[] value = {"cat", "dog", "pig"};
-        String key = "rat";
+    public static void sent(String value, String[] abuses) throws ElementAbuseException {
+        for (String abus : abuses) {
+            if (value.equals(abus)) {
+                throw new ElementAbuseException("Illegal key");
+            }
+        }
+    }
+
+    public static void process(String[] value, String key, String[] abuses) {
         try {
-            indexOf(value, key);
-        } catch (ElementNotFoundException e) {
+            if (indexOf(value, key) != -1) {
+                sent(key, abuses);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        String[] value = {"cat", "dog", "pig"};
+        String key = "cat";
+        String[] abuses = {"dog", "pig"};
+        process(value, key, abuses);
     }
 }
