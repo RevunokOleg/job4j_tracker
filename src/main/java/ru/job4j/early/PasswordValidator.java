@@ -2,6 +2,15 @@ package ru.job4j.early;
 
 public class PasswordValidator {
     private static final String[] FORBIDDEN = {"qwerty", "12345", "password", "admin", "user"};
+    private static final String ERROR_PASSWORD_NULL = "Password can't be null";
+    private static final String ERROR_LENGTH = "Password should be length [8, 32]";
+    private static final String ERRORS_SUBSTRINGS = "Password shouldn't contain substrings: qwerty, 12345, password, admin, user";
+    private static final String ERROR_UPPERCASE = "Password should contain at least one uppercase letter";
+    private static final String ERROR_LOWERCASE = "Password should contain at least one lowercase letter";
+    private static final String ERROR_DIGIT = "Password should contain at least one figure";
+    private static final String ERROR_SPECIAL = "Password should contain at least one special symbol";
+    private static final int MIN_PASSWORD_LENGTH = 8;
+    private static final int MAX_PASSWORD_LENGTH = 32;
 
     /**
      * Метод проверят пароль по правилам:
@@ -25,12 +34,12 @@ public class PasswordValidator {
     public static String validate(String password) {
         if (password == null) {
             throw new IllegalArgumentException(
-                    "Password can't be null"
+                    ERROR_PASSWORD_NULL
             );
         }
-        if (password.length() < 8 || password.length() > 32) {
+        if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
             throw new IllegalArgumentException(
-                    "Password should be length [8, 32]"
+                    ERROR_LENGTH
             );
         }
 
@@ -55,31 +64,30 @@ public class PasswordValidator {
                 break;
             }
         }
-        for (String substring : FORBIDDEN) {
-            if (password.toLowerCase().contains(substring.toLowerCase())) {
-                throw new IllegalArgumentException(
-                        "Password shouldn't contain substrings: qwerty, 12345, password, admin, user"
-                );
+        String lowerPassword = password.toLowerCase();
+        for (String forbidden : FORBIDDEN) {
+            if (lowerPassword.contains(forbidden)) {
+                throw new IllegalArgumentException(ERRORS_SUBSTRINGS);
             }
         }
         if (!hasUpCase) {
             throw new IllegalArgumentException(
-                    "Password should contain at least one uppercase letter"
+                    ERROR_UPPERCASE
             );
         }
         if (!hasLowCase) {
             throw new IllegalArgumentException(
-                    "Password should contain at least one lowercase letter"
+                    ERROR_LOWERCASE
             );
         }
         if (!hasDigit) {
             throw new IllegalArgumentException(
-                    "Password should contain at least one figure"
+                    ERROR_DIGIT
             );
         }
         if (!hasSpecial) {
             throw new IllegalArgumentException(
-                    "Password should contain at least one special symbol"
+                    ERROR_SPECIAL
             );
         }
         return password;
