@@ -35,8 +35,8 @@ public class AnalyzeByMap {
         int pupilsCount = pupils.size();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                scoreBySubject.put(subject.name(), scoreBySubject.getOrDefault(subject.name(), 0)
-                        + subject.score());
+                scoreBySubject.merge(subject.name(), subject.score(), (oldValue, newValue)
+                        -> oldValue + subject.score());
             }
         }
         for (String key : scoreBySubject.keySet()) {
@@ -65,8 +65,8 @@ public class AnalyzeByMap {
         Map<String, Integer> scoreBySubject = new LinkedHashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                scoreBySubject.put(subject.name(), scoreBySubject.getOrDefault(subject.name(), 0)
-                        + subject.score());
+                scoreBySubject.merge(subject.name(), subject.score(), (oldValue, newValue)
+                        -> oldValue + subject.score());
             }
         }
         for (String key : scoreBySubject.keySet()) {
