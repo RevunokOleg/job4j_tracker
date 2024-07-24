@@ -24,9 +24,9 @@ public class College {
         if (student.isEmpty()) {
             return Optional.empty();
         }
-            return students.get(student.get())
-                    .stream()
-                    .filter(subject -> subject.name().equals(name))
-                    .findFirst();
+        return students.get(student.get())
+                .stream()
+                .filter(subject -> subject.name().equals(name))
+                .findFirst();
     }
 }
